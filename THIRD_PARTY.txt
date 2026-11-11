@@ -1,0 +1,25 @@
+Dependency provenance (assistant record, not student justification)
+Retrieved 2026-11-10 from primary upstream sources:
+  https://github.com/dlbeer/quirc
+  https://codeload.github.com/dlbeer/quirc/tar.gz/refs/heads/master
+  https://github.com/nothings/stb
+  https://raw.githubusercontent.com/nothings/stb/master/stb_image.h
+
+quirc core sources are included under vendor/quirc/lib, with upstream LICENSE
+and README.md. The included LICENSE identifies the ISC license. stb_image.h
+contains its upstream license alternatives at the end of the header. Preserve
+these notices. The included source bytes are recorded in evidence/SHA256SUMS.
+Upstream branch URLs are mutable; the bundled files and hashes identify the
+actual snapshot used. No current maintenance/security audit is claimed.
+
+Local quirc changes to make the supplied -Wall -Wextra build warning-free:
+  quirc.c: cast h to size_t on both sides of one overflow comparison.
+  identify.c: explicitly mark area_count's unused y parameter;
+  cast two nonnegative comparison operands to unsigned int.
+No decoding algorithm changes were intended.
+
+stb_image is compiled with only PNG/JPEG support; no libpng, libjpeg, Java,
+Python decoder, or external socket library is used by the executables.
+QRDecode is a separate executable invoked by the server via exec.
+Test images were generated using Python qrcode and Pillow; running the bundled
+tests does not require either library because those image files are included.

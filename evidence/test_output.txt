@@ -1,0 +1,23 @@
+make: Entering directory '/workspace/scratch/f78a083f4afe/qr_project'
+python3 tests/integration.py
+PASS: url.png
+PASS: url.jpg
+PASS: not_image.txt
+PASS: blank.png
+PASS: truncated.png
+PASS: hostile.bin
+PASS: small-write PNG decoded
+PASS: full PNG byte count
+PASS: second client decoded while first uploads
+PASS: third client refused
+PASS: first client decoded
+PASS: two client sessions overlap
+PASS: killed-client recovery, run 1
+PASS: connection reset detected, run 1
+PASS: reset recovery, run 1
+PASS: killed-client recovery, run 2
+PASS: connection reset detected, run 2
+PASS: reset recovery, run 2
+PASS: C++ client decodes PNG
+19 checks passed.
+make: Leaving directory '/workspace/scratch/f78a083f4afe/qr_project'

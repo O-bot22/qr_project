@@ -1,0 +1,93 @@
+AI-use record initiated 2026-11-10. This is a factual assistant-side record,
+not a statement that the student has reviewed or accepted the generated code.
+
+User prompt in this session:
+  get to work buddy
+User supplied:
+  project_1_cs_3516+%281%29.pdf
+  project_1_cs_3516_rubric.pdf
+  Hands-on+TCP+Echo+Client+%26+Server.docx
+
+Assistant-generated artifacts, grouped by milestones:
+Roadmap 1: exact transfer helpers, client/server text extension, partial-I/O
+  tests, serial demo option. No student protocol spec or explain-back written.
+Roadmap 2/3: isolated quirc/stb_image decoder, size bounds, typed-mode routing,
+  6 input files and malformed input tests. No student library justification.
+Roadmap 4: fork-per-client implementation and serial-vs-concurrent test.
+Roadmap 5: process-safe structured logs, early EOF/reset, timeout/rate/busy,
+  interrupted-wait and partial-send tests. No packet-capture verdict generated.
+Build/submission: Makefile, operational README, provenance, local evidence,
+  checklist, and this initial AI-use record.
+
+Assistant implementation choices (not student acceptance decisions):
+- Used POSIX sockets and separate processes, matching allowed APIs and reducing
+  shared-state concerns. Log writes are serialized with flock.
+- Included quirc plus stb_image source to avoid a build-time package download.
+- Rejected shell command interpolation for decoding; used fork/exec and private
+  temporary files to avoid treating uploaded bytes as shell instructions.
+- Kept original and typed modes explicit because the PDF and rubric differ.
+- Did not fabricate Secnet results, a pre-AI spec, or student reflections.
+
+Student to complete for EACH milestone:
+  What I accepted:
+  Why I accepted it and how I verified it:
+  What I rejected or changed:
+  Why:
+  Evidence paths:
+  Subsequent prompts (verbatim):
+
+Revision requested 2026-11-11 (verbatim user prompt):
+  code should only use the typed mode that only need to handle images coming in for QR decoding
+Assistant changes: made the type/length header mandatory, removed legacy and
+text-echo paths and their mode switches, retained image type 2, rejected all
+other types, and updated tests and usage documentation. This supersedes the
+initial two-mode implementation choice above. Student review remains pending.
+
+Further revision requested 2026-11-11 (verbatim user prompt):
+  the client does not need to send a type
+Attachment: CS3516 Project Spec.pdf (read, not modified).
+Assistant changes: removed the request type field entirely. The client sends
+one network-order uint32 length then image bytes, and the server reads that
+format. Updated tests, README, and checklist. This supersedes the preceding
+mandatory-type revision. Response framing and image-only decoding remain.
+
+Assignment update supplied 2026-11-11 (user excerpts):
+  Roadmap 1: text display no longer needed in your final version
+  For the small-segment test, send any file your final server accepts and show that the whole file arrives.
+  Roadmap 4: no demo script required
+  Instead of a reproducible slow-client demo, add a short section to README.txt
+  Include one log excerpt in roadmap4/evidence_log.txt showing at least two clients served with overlapping timestamps.
+  Roadmap 5: test any 2 of the 5 faults
+Assistant changes: removed --serial and its demonstration checks; recorded real
+concurrent image sessions and verified overlapping timestamps; added received
+byte count/checksum checks for a fragmented PNG; instrumented and retested two
+faults (partial send and EINTR); generated a technical two-row fault table and
+expected/actual results. Preserved the supplied student specification PDF
+unchanged in docs. Added the three Roadmap 4 question placeholders; student
+answers remain unwritten under the earlier AI-use policy. Historical entries
+above describe earlier revisions and are not the current requirements.
+
+User prompt (verbatim):
+  can you reduce the complexity of the tests?
+Assistant changes: replaced the threaded C++ partial-I/O and signal fault test
+with two straightforward TCP faults (killed client and connection reset), each
+run twice. Removed test-only TransferStats instrumentation, duplicate checks,
+and repeated server configurations. One Python script now starts one server,
+runs five groups (19 checks), and writes the results and evidence. Removed
+stale reports from the old test suite and updated the fault table/README.
+Student review and acceptance remain to be recorded.
+
+User prompt (verbatim):
+  what is FNV and can it be taken out of the project
+Assistant changes: removed the FNV-1a checksum calculation from the server,
+its log field, and the checksum comparison from the tests. The small-write
+upload still checks received byte count and the decoded URL. Updated README
+and regenerated evidence. Historical entries above describe prior versions.
+
+User prompt (verbatim):
+  reduce the complexity of the server, specifically of the socket receiving function
+Assistant changes: replaced the server's receive lambda and generic polling
+transfer call with a dedicated receive_all() loop around blocking recv().
+Configured SO_RCVTIMEO once per connection. Kept partial-read handling, EOF,
+reset, timeout responses, and EINTR retry. The stop handler shuts down the
+worker socket to wake blocked receives. Updated docs and reran tests.

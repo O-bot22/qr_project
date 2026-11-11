@@ -1,0 +1,5 @@
+{"timestamp":"2026-11-11 02:32:56","client_ip":"127.0.0.1","client_id":50,"event":"connected","error_code":0,"epoch_us":1794382376228774,"bytes":0}
+{"timestamp":"2026-11-11 02:32:56","client_ip":"127.0.0.1","client_id":50,"event":"image_received","error_code":0,"epoch_us":1794382376460391,"bytes":1484}
+{"timestamp":"2026-11-11 02:32:56","client_ip":"127.0.0.1","client_id":50,"event":"success","error_code":0,"epoch_us":1794382376464314,"bytes":0}
+{"timestamp":"2026-11-11 02:32:56","client_ip":"127.0.0.1","client_id":50,"event":"peer_closed_or_incomplete","error_code":0,"epoch_us":1794382376464447,"bytes":0}
+{"timestamp":"2026-11-11 02:32:56","client_ip":"127.0.0.1","client_id":50,"event":"disconnected","error_code":0,"epoch_us":1794382376464455,"bytes":0}

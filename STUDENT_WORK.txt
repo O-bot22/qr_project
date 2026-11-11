@@ -1,0 +1,43 @@
+Required student work (do not submit this checklist as your answers)
+
+1. Locate your genuine pre-AI protocol specification. Do not backdate one.
+   If none exists, disclose that and ask the instructor how to proceed.
+   Reconcile your own design with the image-only length-prefixed implementation.
+2. Write your library justification in your own words. Verify license,
+   dependencies, maintenance status, and safety against primary sources.
+   THIRD_PARTY.txt provides source locations, not your justification.
+3. The supplied CS3516 Project Spec.pdf uses only length plus image bytes;
+   this implementation follows that framing. Resolve the original rubric
+   request for a type header with teaching staff. Confirm the busy-message
+   ambiguity and stream-recovery assumptions. Also distinguish observable
+   EOF/reset from inactivity in your own early-disconnect explanation; the
+   server handles EOF/reset immediately and times out inactive connections.
+4. Copy this project to your Secnet VM. Run make clean all and make test;
+   retain the build and test output there. Make sure you can explain every
+   function and system call you keep.
+5. Use an accepted QR image for the small-segment test on Secnet. Retain
+   the full-file receipt evidence and a packet capture.
+   Small application writes alone are not proof of small packets. A permitted
+   capture command is: tcpdump -i lo -s 0 -w small_segments.pcap 'tcp port 2316'
+   Use the appropriate interface for traffic between VMs. Capture permissions
+   depend on your VM. Keep captures restricted to your test traffic.
+6. Complete the three Roadmap 4 answers in README.txt in your own words.
+   Review roadmap4/evidence_log.txt, which contains actual overlapping client
+   sessions. No serial or slow-client demo is required under the update.
+7. Review docs/fault_table.md for the two selected faults: client killed mid-transfer
+   and connection reset. Verify the expected/observed/handling/retest entries
+   against the recorded runs and repeat on Secnet. Only two rows are needed;
+   there is no extra-credit requirement to test all five faults.
+8. Provide the actual relevant log and packet capture for the required AI
+   diagnosis incident. Record the AI diagnosis, independently compare it with
+   your capture, and write your own verdict. This package does not invent one.
+9. Run Valgrind on Secnet with child tracing (decoder runs via exec):
+   valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all \
+     --log-file=valgrind.%p.txt ./QRServer PORT 2012
+   Exercise inputs with QRClient, close clients, then stop the server cleanly.
+   Inspect every process log and address any errors. Preserve the evidence.
+10. Fill in your actual accepted/rejected decisions and reasons in the AI log;
+    record subsequent prompts and changes per milestone. Do not claim you
+    accepted code that you have not reviewed.
+11. Complete partner signup/evaluation if applicable. Review all deliverables,
+    then make a standard ZIP containing your final repository and evidence.

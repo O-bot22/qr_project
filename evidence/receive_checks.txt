@@ -1,0 +1,4 @@
+PASS idle receive timeout: code 2 followed by EOF
+PASS partial-body timeout: code 2 followed by EOF
+PASS split header and progressing upload longer than timeout
+PASS shutdown during blocked recv: 0.001s with 80s inactivity timeout

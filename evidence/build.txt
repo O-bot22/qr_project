@@ -1,0 +1,10 @@
+make: Entering directory '/workspace/scratch/f78a083f4afe/qr_project'
+rm -f QRServer QRClient QRDecode vendor/quirc/lib/quirc.o vendor/quirc/lib/decode.o vendor/quirc/lib/identify.o vendor/quirc/lib/version_db.o
+g++ -std=c++17 -O2 -g -Wall -Wextra -Wpedantic QRServer.cpp -o QRServer
+g++ -std=c++17 -O2 -g -Wall -Wextra -Wpedantic QRClient.cpp -o QRClient
+cc -std=c99 -O2 -g -Wall -Wextra -Wpedantic   -c -o vendor/quirc/lib/quirc.o vendor/quirc/lib/quirc.c
+cc -std=c99 -O2 -g -Wall -Wextra -Wpedantic   -c -o vendor/quirc/lib/decode.o vendor/quirc/lib/decode.c
+cc -std=c99 -O2 -g -Wall -Wextra -Wpedantic   -c -o vendor/quirc/lib/identify.o vendor/quirc/lib/identify.c
+cc -std=c99 -O2 -g -Wall -Wextra -Wpedantic   -c -o vendor/quirc/lib/version_db.o vendor/quirc/lib/version_db.c
+g++ -std=c++17 -O2 -g -Wall -Wextra -Wpedantic QRDecode.cpp vendor/quirc/lib/quirc.o vendor/quirc/lib/decode.o vendor/quirc/lib/identify.o vendor/quirc/lib/version_db.o -lm -o QRDecode
+make: Leaving directory '/workspace/scratch/f78a083f4afe/qr_project'
